@@ -28,37 +28,25 @@ public class ImpexScriptGenerator {
         generateMedia();
     }
     private static final String[] mediaFormatArray = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
+    private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
     
     public static void generateMedia() {
 
         
         //Write the CSV file header
-        String mediaFolderModeType = "INSERT_UPDATE";
-        String madiaFolderItemType = "MediaFolder";
-
-        List<String> mediaAttributeList = new ArrayList<>();
         List mediaValuesList = new ArrayList<>();
-        mediaAttributeList.add("mediaFormat(qualifier)");
-        mediaAttributeList.add("code[unique=true]");
-        mediaAttributeList.add("$media");
-        mediaAttributeList.add("mediaFormat(qualifier)");
-        mediaAttributeList.add("mime[default=’image/jpg’]");
-        mediaAttributeList.add("$catalogVersion");
-        mediaAttributeList.add("folder(qualifier)");
-        mediaAttributeList.add("realfilename");
-        String mediaHeader = mediaFolderModeType + " " + madiaFolderItemType + commaDelimiter;
-
-        for (int i = 0; i < mediaAttributeList.size(); i++) {//Attributes Contented in the Headers
-            mediaHeader += " " + mediaAttributeList.get(i).toString();
-            mediaHeader += " " + commaDelimiter;
-        }
-        System.out.println("Header : " + mediaHeader);
 
         //  Populating the values for the Impex
         String filename = "HelloImAFile.jpg";
         String mediasConcatenate = "";//the Initailizing the concatenation of the file 
         //Expected Outcome --> /1200Wx1200H/EOH_089_1200.jpg,/300Wx300H/EOH_089_1200.jpg,/96Wx96H/EOH_089_1200.jpg,/515Wx515H/EOH_089_1200.jpg,/65Wx65H/EOH_089_1200.jpg,/30Wx30H/EOH_089_1200.jpg
         ProductValue productValueObject = new ProductValue();
+        MediaFolderValue mfv = new MediaFolderValue();
+        mfv.setPath("images"); mfv.setQualifier("images");
+        //Expected Output --> ;images;images;
+        String mfvStringLine = commaDelimiter + mfv.getQualifier()+commaDelimiter+mfv.getPath();
+        System.out.println("#MEDIA");
+        System.out.println("Media Folder Value Line : "+mfvStringLine);
         for (int i = 0; i < mediaFormatArray.length; i++) {
 
             MediaValue tempMediaValueObject = new MediaValue();// MediaValue Obeject is being reset
