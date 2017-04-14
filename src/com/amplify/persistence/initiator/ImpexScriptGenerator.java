@@ -28,12 +28,11 @@ public class ImpexScriptGenerator {
         generateMedia();
     }
     private static final String[] mediaFormatArray = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
-    private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
+    private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
     
     public static void generateMedia() {
-
         
-        //Write the CSV file header
+       //Media Values 
         List mediaValuesList = new ArrayList<>();
 
         //  Populating the values for the Impex
@@ -79,6 +78,7 @@ public class ImpexScriptGenerator {
                 //;HelloWorldImAFile;;HelloWorldImAFile.jpg;/300Wx300H/HelloWorldImAFile.jpg;/96Wx96H/HelloWorldImAFile.jpg;
                 String productValueLine = commaDelimiter +"\t"+ productValueObject.getCode() + commaDelimiter + " " + commaDelimiter + productValueObject.getGalleryImages() + commaDelimiter + " " + productValueObject.getPicture() + " " + commaDelimiter + " " + productValueObject.getThumbnail();
                 System.out.println("# Update Products with Media and Media Containers");
+                System.out.println(HEADER_STRINGS[]);
                 System.out.println("Product Value Line : " + productValueLine);
             }
 
@@ -96,6 +96,7 @@ public class ImpexScriptGenerator {
         Iterator iteratorMediaValues = mediaValuesList.iterator();
         MediaValue mediaValue = null;
         System.out.println("# Create Media");
+        System.out.println(HEADER_STRINGS[0]);
         while (iteratorMediaValues.hasNext()) {//the Object
             mediaValue = (MediaValue) iteratorMediaValues.next();
             String valueLine = commaDelimiter+ mediaValue.getMediaFormat() + commaDelimiter + mediaValue.getCode() + " " + commaDelimiter + " " + mediaValue.getMedia() + " " + commaDelimiter + mediaValue.getMime() + commaDelimiter + mediaValue.getCatalogVersion() + " " + commaDelimiter + mediaValue.getFolder() + " " + commaDelimiter + mediaValue.getRealFilename();
