@@ -24,13 +24,13 @@ public class ImpexScriptGenerator {
      */
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ";";
-    private static final String newLineSeparator = "\n";
+    private static final String NEW_LINE_SEPARATOR = "\n";
 
     public static void main(String[] args) {
         // TODO code application logic 
         generateMedia();
     }
-    private static final String[] mediaFormatArray = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
+    private static final String[] MEDIA_FORMAT_STRING = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
     private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
     
     public static void generateMedia() {
@@ -50,7 +50,7 @@ public class ImpexScriptGenerator {
         System.out.println("#MEDIA");
         System.out.println(HEADER_STRINGS[0]);
         System.out.println("Media Folder Value Line : "+mfvStringLine);
-        for (int i = 0; i < mediaFormatArray.length; i++) {
+        for (int i = 0; i < MEDIA_FORMAT_STRING.length; i++) {
 
             MediaValue tempMediaValueObject = new MediaValue();// MediaValue Obeject is being reset
             MediaContainerValue tempMediaContainerValueObject = new MediaContainerValue();// Media Container Value Obeject is being reset
@@ -58,20 +58,20 @@ public class ImpexScriptGenerator {
             productValueObject.setCode(filename);
             productValueObject.setGalleryImages(filename);
 
-            if (i == mediaFormatArray.length - 4) {
+            if (i == MEDIA_FORMAT_STRING.length - 4) {
                 //expected Outcome --> /300Wx300H/HelloImAFile.jpg
-                String picture = "/" + mediaFormatArray[i] + "/" + filename;
+                String picture = "/" + MEDIA_FORMAT_STRING[i] + "/" + filename;
                 productValueObject.setPicture(picture);
             }
-            if (i == mediaFormatArray.length - 3) {
+            if (i == MEDIA_FORMAT_STRING.length - 3) {
                 //expected Outcome --> //96Wx96H/EOH_029_1200.jpg
-                productValueObject.setThumbnail("/" + mediaFormatArray[i] + "/" + filename);
+                productValueObject.setThumbnail("/" + MEDIA_FORMAT_STRING[i] + "/" + filename);
             }
 
             tempMediaContainerValueObject.setQualifier(filename);
-            mediasConcatenate += "images/" + mediaFormatArray[i] + "/" + filename + ",";
+            mediasConcatenate += "images/" + MEDIA_FORMAT_STRING[i] + "/" + filename + ",";
 
-            if (i == mediaFormatArray.length - 1) {//Populate Media Container Values
+            if (i == MEDIA_FORMAT_STRING.length - 1) {//Populate Media Container Values
                 tempMediaContainerValueObject.setMedias(mediasConcatenate.substring(0, mediasConcatenate.length() - 1));//Removing the last string which is not needed
                 //Expected Outcome Example Below--
                 //1200Wx1200H/HelloWorldImAFile.jpg,/300Wx300H/HelloWorldImAFile.jpg,/96Wx96H/HelloWorldImAFile.jpg,/515Wx515H/HelloWorldImAFile.jpg,/65Wx65H/HelloWorldImAFile.jpg,/30Wx30H/HelloWorldImAFile.jpg
@@ -87,9 +87,9 @@ public class ImpexScriptGenerator {
                 System.out.println("Product Value Line : " + productValueLine);
             }
 
-            tempMediaValueObject.setMediaFormat(mediaFormatArray[i]);
-            tempMediaValueObject.setCode("/" + mediaFormatArray[i] + "/" + filename);
-            tempMediaValueObject.setMedia("images/" + mediaFormatArray[i] + "/" + filename);
+            tempMediaValueObject.setMediaFormat(MEDIA_FORMAT_STRING[i]);
+            tempMediaValueObject.setCode("/" + MEDIA_FORMAT_STRING[i] + "/" + filename);
+            tempMediaValueObject.setMedia("images/" + MEDIA_FORMAT_STRING[i] + "/" + filename);
             tempMediaValueObject.setMime(" ");
             tempMediaValueObject.setCatalogVersion(" ");
             tempMediaValueObject.setFolder("images");
@@ -99,7 +99,7 @@ public class ImpexScriptGenerator {
         }
 
         Iterator iteratorMediaValues = mediaValuesList.iterator();
-        MediaValue mediaValue = null;
+        MediaValue mediaValue = new MediaValue();
         System.out.println("# Create Media");
         System.out.println(HEADER_STRINGS[0]);
         while (iteratorMediaValues.hasNext()) {//the Object
