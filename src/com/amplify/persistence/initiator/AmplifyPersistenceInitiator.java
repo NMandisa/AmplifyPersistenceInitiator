@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Noxolo.Mkhungo
  */
-public class ImpexScriptGenerator {
+public class AmplifyPersistenceInitiator {
 
     /**
      * @param args the command line arguments
