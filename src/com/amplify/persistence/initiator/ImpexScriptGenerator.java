@@ -5,6 +5,10 @@
  */
 package com.amplify.persistence.initiator;
 
+import com.amplify.persistence.initiator.model.MediaContainerValue;
+import com.amplify.persistence.initiator.model.MediaFolderValue;
+import com.amplify.persistence.initiator.model.MediaValue;
+import com.amplify.persistence.initiator.model.ProductValue;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,6 +49,7 @@ public class ImpexScriptGenerator {
         //Expected Output --> ;images;images;
         String mfvStringLine = commaDelimiter + mfv.getQualifier()+commaDelimiter+mfv.getPath();
         System.out.println("#MEDIA");
+        System.out.println(HEADER_STRINGS[0]);
         System.out.println("Media Folder Value Line : "+mfvStringLine);
         for (int i = 0; i < mediaFormatArray.length; i++) {
 
@@ -73,12 +78,13 @@ public class ImpexScriptGenerator {
                 //1200Wx1200H/HelloWorldImAFile.jpg,/300Wx300H/HelloWorldImAFile.jpg,/96Wx96H/HelloWorldImAFile.jpg,/515Wx515H/HelloWorldImAFile.jpg,/65Wx65H/HelloWorldImAFile.jpg,/30Wx30H/HelloWorldImAFile.jpg
                 String mediaContainerValueLine = commaDelimiter+ tempMediaContainerValueObject.getQualifier() + commaDelimiter + tempMediaContainerValueObject.getMedias() + commaDelimiter + " " + commaDelimiter;
                 System.out.println("# Create Media Containers");
+                System.out.println(HEADER_STRINGS[2]);
                 System.out.println("Media Container Value : " + mediaContainerValueLine);
                 //Expected Outcome Example Below--
                 //;HelloWorldImAFile;;HelloWorldImAFile.jpg;/300Wx300H/HelloWorldImAFile.jpg;/96Wx96H/HelloWorldImAFile.jpg;
                 String productValueLine = commaDelimiter +"\t"+ productValueObject.getCode() + commaDelimiter + " " + commaDelimiter + productValueObject.getGalleryImages() + commaDelimiter + " " + productValueObject.getPicture() + " " + commaDelimiter + " " + productValueObject.getThumbnail();
                 System.out.println("# Update Products with Media and Media Containers");
-                System.out.println(HEADER_STRINGS[]);
+                System.out.println(HEADER_STRINGS[3]);
                 System.out.println("Product Value Line : " + productValueLine);
             }
 
@@ -100,7 +106,6 @@ public class ImpexScriptGenerator {
         while (iteratorMediaValues.hasNext()) {//the Object
             mediaValue = (MediaValue) iteratorMediaValues.next();
             String valueLine = commaDelimiter+ mediaValue.getMediaFormat() + commaDelimiter + mediaValue.getCode() + " " + commaDelimiter + " " + mediaValue.getMedia() + " " + commaDelimiter + mediaValue.getMime() + commaDelimiter + mediaValue.getCatalogVersion() + " " + commaDelimiter + mediaValue.getFolder() + " " + commaDelimiter + mediaValue.getRealFilename();
-            
             System.out.println("Media Value Line : " + valueLine);
 
         }
