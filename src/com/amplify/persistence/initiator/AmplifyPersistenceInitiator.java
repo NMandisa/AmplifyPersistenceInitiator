@@ -5,10 +5,7 @@
  */
 package com.amplify.persistence.initiator;
 
-import com.amplify.persistence.initiator.model.MediaContainerValue;
-import com.amplify.persistence.initiator.model.MediaFolderValue;
-import com.amplify.persistence.initiator.model.MediaValue;
-import com.amplify.persistence.initiator.model.ProductValue;
+import com.amplify.persistence.initiator.model.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,13 +22,14 @@ public class AmplifyPersistenceInitiator {
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ";";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    private static final String[] MEDIA_FORMAT_STRING = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
+    private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
 
     public static void main(String[] args) {
         // TODO code application logic 
         generateMedia();
     }
-    private static final String[] MEDIA_FORMAT_STRING = {"1200Wx1200H", "515Wx515H", "300Wx300H", "96Wx96H", "65Wx65H", "30Wx30H"};
-    private static final String[] HEADER_STRINGS ={"INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];","INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;","INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;","INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;"};
+
     
     public static void generateMedia() {
         
