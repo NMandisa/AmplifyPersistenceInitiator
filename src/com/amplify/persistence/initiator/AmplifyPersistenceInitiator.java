@@ -6,9 +6,15 @@
 package com.amplify.persistence.initiator;
 
 import com.amplify.persistence.initiator.model.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,8 +38,22 @@ public class AmplifyPersistenceInitiator {
 
     
     public static void generateMedia() {
-        
-       //Media Values 
+//        BufferedWriter  bw = null;
+//        FileWriter fw = null;
+        try {
+            File file = new File(System.getProperty("user.dir")+"/resource/media.csv");
+            
+            if(!file.exists()){
+            
+                file.createNewFile();
+            }
+            
+            FileWriter fw = new FileWriter(file,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(".........werrrrrrrr...........");
+//            System.out.print("System get ------------>"+System.getProperty("user.dir")+"/resource/images/1200Wx1200H");
+//            FileWriter fileWriter = new FileWriter(System.getProperty("user.dir")+"/resource/media.csv",true);
+            //Media Values 
         List mediaValuesList = new ArrayList<>();
 
         //  Populating the values for the Impex
@@ -100,12 +120,21 @@ public class AmplifyPersistenceInitiator {
         MediaValue mediaValue = new MediaValue();
         System.out.println("# Create Media");
         System.out.println(HEADER_STRINGS[0]);
+       
+        bw.write(""+HEADER_STRINGS[0]);
         while (iteratorMediaValues.hasNext()) {//the Object
             mediaValue = (MediaValue) iteratorMediaValues.next();
             String valueLine = COMMA_DELIMITER+ mediaValue.getMediaFormat() + COMMA_DELIMITER + mediaValue.getCode() + " " + COMMA_DELIMITER + " " + mediaValue.getMedia() + " " + COMMA_DELIMITER + mediaValue.getMime() + COMMA_DELIMITER + mediaValue.getCatalogVersion() + " " + COMMA_DELIMITER + mediaValue.getFolder() + " " + COMMA_DELIMITER + mediaValue.getRealFilename();
             System.out.println("Media Value Line : " + valueLine);
+            bw.write(valueLine);
 
         }
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
+        
+        
+       
 
     }
 
