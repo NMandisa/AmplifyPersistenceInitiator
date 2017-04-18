@@ -35,8 +35,8 @@ public class AmplifyPersistenceInitiator {
     }
 
     public static void generateMedia() throws IOException {
-        BufferedWriter bw = null;
         FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
             File file = new File(System.getProperty("user.dir") + "/resource/media.csv");
 
