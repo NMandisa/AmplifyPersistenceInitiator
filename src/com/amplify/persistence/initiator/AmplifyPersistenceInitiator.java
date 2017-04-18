@@ -47,7 +47,7 @@ public class AmplifyPersistenceInitiator {
 
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
-            bw.write(".........werrrrrrrr...........");
+         
 //            System.out.print("System get ------------>"+System.getProperty("user.dir")+"/resource/images/1200Wx1200H");
 //            FileWriter fileWriter = new FileWriter(System.getProperty("user.dir")+"/resource/media.csv",true);
             //Media Values 
@@ -119,12 +119,14 @@ public class AmplifyPersistenceInitiator {
             System.out.println("# Create Media");
             System.out.println(HEADER_STRINGS[0]);
 
-            bw.write("" + HEADER_STRINGS[0]);
+            bw.write(HEADER_STRINGS[0]);
+            bw.write(NEW_LINE_SEPARATOR);
             while (iteratorMediaValues.hasNext()) {//the Object
                 mediaValue = (MediaValue) iteratorMediaValues.next();
                 String valueLine = COMMA_DELIMITER + mediaValue.getMediaFormat() + COMMA_DELIMITER + mediaValue.getCode() + " " + COMMA_DELIMITER + " " + mediaValue.getMedia() + " " + COMMA_DELIMITER + mediaValue.getMime() + COMMA_DELIMITER + mediaValue.getCatalogVersion() + " " + COMMA_DELIMITER + mediaValue.getFolder() + " " + COMMA_DELIMITER + mediaValue.getRealFilename();
                 System.out.println("Media Value Line : " + valueLine);
                 bw.write(valueLine);
+                bw.write(NEW_LINE_SEPARATOR);
 
             }
         } catch (IOException ex) {
