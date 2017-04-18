@@ -1,6 +1,7 @@
 #MEDIA
 INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];
 ;images;images
+# Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;
 ;1200Wx1200H;/1200Wx1200H/HelloImAFile.jpg ; images/1200Wx1200H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;515Wx515H;/515Wx515H/HelloImAFile.jpg ; images/515Wx515H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg

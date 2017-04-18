@@ -38,7 +38,6 @@ public class AmplifyPersistenceInitiator {
         File file = new File(System.getProperty("user.dir") + "/resource/media.csv");
         FileWriter fw = new FileWriter(file,true);
         BufferedWriter bw = new BufferedWriter(fw);
-        
         try {
             
 
@@ -121,8 +120,10 @@ public class AmplifyPersistenceInitiator {
             Iterator iteratorMediaValues = mediaValuesList.iterator();
             MediaValue mediaValue = new MediaValue();
             System.out.println("# Create Media");
+           
             System.out.println(HEADER_STRINGS[1]);
-
+            bw.write("# Create Media");
+            bw.write(NEW_LINE_SEPARATOR);
             bw.write(HEADER_STRINGS[1]);
             bw.write(NEW_LINE_SEPARATOR);
             while (iteratorMediaValues.hasNext()) {//the Object
