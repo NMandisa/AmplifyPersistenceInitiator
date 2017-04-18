@@ -35,18 +35,20 @@ public class AmplifyPersistenceInitiator {
     }
 
     public static void generateMedia() throws IOException {
-        FileWriter fw = null;
-        BufferedWriter bw = null;
+        File file = new File(System.getProperty("user.dir") + "/resource/media.csv");
+        FileWriter fw = new FileWriter(file,true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
         try {
-            File file = new File(System.getProperty("user.dir") + "/resource/media.csv");
+            
 
             if (!file.exists()) {
 
                 file.createNewFile();
             }
 
-            fw = new FileWriter(file, true);
-            bw = new BufferedWriter(fw);
+//            fw = new FileWriter(file,true);
+//            bw = new BufferedWriter(fw);
          
 //            System.out.print("System get ------------>"+System.getProperty("user.dir")+"/resource/images/1200Wx1200H");
 //            FileWriter fileWriter = new FileWriter(System.getProperty("user.dir")+"/resource/media.csv",true);
