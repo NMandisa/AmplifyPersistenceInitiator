@@ -62,7 +62,7 @@ public class AmplifyPersistenceInitiator {
             bw.write(NEW_LINE_SEPARATOR);
             bw.write(HEADER_STRINGS[0]);
             bw.write(NEW_LINE_SEPARATOR);
-            String mfvStringLine = COMMA_DELIMITER + mfv.getQualifier() + COMMA_DELIMITER + mfv.getPath();
+            String mfvStringLine = COMMA_DELIMITER + mfv.getQualifier() + COMMA_DELIMITER + mfv.getPath() +COMMA_DELIMITER;
             bw.write(mfvStringLine);
             bw.write(NEW_LINE_SEPARATOR);
             System.out.println("#MEDIA");
@@ -96,13 +96,19 @@ public class AmplifyPersistenceInitiator {
                     //1200Wx1200H/HelloWorldImAFile.jpg,/300Wx300H/HelloWorldImAFile.jpg,/96Wx96H/HelloWorldImAFile.jpg,/515Wx515H/HelloWorldImAFile.jpg,/65Wx65H/HelloWorldImAFile.jpg,/30Wx30H/HelloWorldImAFile.jpg
                     String mediaContainerValueLine = COMMA_DELIMITER + tempMediaContainerValueObject.getQualifier() + COMMA_DELIMITER + tempMediaContainerValueObject.getMedias() + COMMA_DELIMITER + " " + COMMA_DELIMITER;
                     System.out.println("# Create Media Containers");
+                    bw.write("# Create Media Containers"); bw.write(NEW_LINE_SEPARATOR);
                     System.out.println(HEADER_STRINGS[2]);
+                    bw.write(HEADER_STRINGS[2]);bw.write(NEW_LINE_SEPARATOR);
                     System.out.println("Media Container Value : " + mediaContainerValueLine);
+                    bw.write(mediaContainerValueLine); bw.write(NEW_LINE_SEPARATOR);
                     //Expected Outcome Example Below--
                     //;HelloWorldImAFile;;HelloWorldImAFile.jpg;/300Wx300H/HelloWorldImAFile.jpg;/96Wx96H/HelloWorldImAFile.jpg;
-                    String productValueLine = COMMA_DELIMITER + "\t" + productValueObject.getCode() + COMMA_DELIMITER + " " + COMMA_DELIMITER + productValueObject.getGalleryImages() + COMMA_DELIMITER + " " + productValueObject.getPicture() + " " + COMMA_DELIMITER + " " + productValueObject.getThumbnail();
+                    String productValueLine = COMMA_DELIMITER + "\t" + productValueObject.getCode() + COMMA_DELIMITER + " " + COMMA_DELIMITER + productValueObject.getGalleryImages() + COMMA_DELIMITER + " " + productValueObject.getPicture() + " " + COMMA_DELIMITER + " " + productValueObject.getThumbnail() + COMMA_DELIMITER;
+                    bw.write("# Update Products with Media and Media Containers");bw.write(NEW_LINE_SEPARATOR);
                     System.out.println("# Update Products with Media and Media Containers");
+                    bw.write(HEADER_STRINGS[3]);bw.write(NEW_LINE_SEPARATOR);
                     System.out.println(HEADER_STRINGS[3]);
+                    bw.write(productValueLine);bw.write(NEW_LINE_SEPARATOR);
                     System.out.println("Product Value Line : " + productValueLine);
                 }
 
@@ -128,7 +134,7 @@ public class AmplifyPersistenceInitiator {
             bw.write(NEW_LINE_SEPARATOR);
             while (iteratorMediaValues.hasNext()) {//the Object
                 mediaValue = (MediaValue) iteratorMediaValues.next();
-                String valueLine = COMMA_DELIMITER + mediaValue.getMediaFormat() + COMMA_DELIMITER + mediaValue.getCode() + " " + COMMA_DELIMITER + " " + mediaValue.getMedia() + " " + COMMA_DELIMITER + mediaValue.getMime() + COMMA_DELIMITER + mediaValue.getCatalogVersion() + " " + COMMA_DELIMITER + mediaValue.getFolder() + " " + COMMA_DELIMITER + mediaValue.getRealFilename();
+                String valueLine = COMMA_DELIMITER + mediaValue.getMediaFormat() + COMMA_DELIMITER + mediaValue.getCode() + " " + COMMA_DELIMITER + " " + mediaValue.getMedia() + " " + COMMA_DELIMITER + mediaValue.getMime() + COMMA_DELIMITER + mediaValue.getCatalogVersion() + " " + COMMA_DELIMITER + mediaValue.getFolder() + " " + COMMA_DELIMITER + mediaValue.getRealFilename() + COMMA_DELIMITER;
                 System.out.println("Media Value Line : " + valueLine);
                 bw.write(valueLine);
                 bw.write(NEW_LINE_SEPARATOR);

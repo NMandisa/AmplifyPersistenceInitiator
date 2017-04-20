@@ -1,11 +1,34 @@
-#MEDIA
-INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];
-;images;images
-# Create Media
-INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;
+#MEDIA;;;;;;;
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];;;;;
+;images;images;;;;;
+# Create Media Containers;;;;;;;
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;;;;
+;HelloImAFile.jpg;images/1200Wx1200H/HelloImAFile.jpg,images/515Wx515H/HelloImAFile.jpg,images/300Wx300H/HelloImAFile.jpg,images/96Wx96H/HelloImAFile.jpg,images/65Wx65H/HelloImAFile.jpg,images/30Wx30H/HelloImAFile.jpg; ;;;;
+# Update Products with Media and Media Containers;;;;;;;
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;;
+;"	HelloImAFile.jpg"; ;HelloImAFile.jpg; /300Wx300H/HelloImAFile.jpg ; /96Wx96H/HelloImAFile.jpg;;
+# Create Media;;;;;;;
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename
 ;1200Wx1200H;/1200Wx1200H/HelloImAFile.jpg ; images/1200Wx1200H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;515Wx515H;/515Wx515H/HelloImAFile.jpg ; images/515Wx515H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;300Wx300H;/300Wx300H/HelloImAFile.jpg ; images/300Wx300H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;96Wx96H;/96Wx96H/HelloImAFile.jpg ; images/96Wx96H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;65Wx65H;/65Wx65H/HelloImAFile.jpg ; images/65Wx65H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
 ;30Wx30H;/30Wx30H/HelloImAFile.jpg ; images/30Wx30H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg
+#MEDIA
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true];
+;images;images;
+# Create Media Containers
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;
+;HelloImAFile.jpg;images/1200Wx1200H/HelloImAFile.jpg,images/515Wx515H/HelloImAFile.jpg,images/300Wx300H/HelloImAFile.jpg,images/96Wx96H/HelloImAFile.jpg,images/65Wx65H/HelloImAFile.jpg,images/30Wx30H/HelloImAFile.jpg; ;
+# Update Products with Media and Media Containers
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail;
+;	HelloImAFile.jpg; ;HelloImAFile.jpg; /300Wx300H/HelloImAFile.jpg ; /96Wx96H/HelloImAFile.jpg;
+# Create Media
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default=’image/jpg’];$catalogVersion;folder(qualifier);realfilename;
+;1200Wx1200H;/1200Wx1200H/HelloImAFile.jpg ; images/1200Wx1200H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
+;515Wx515H;/515Wx515H/HelloImAFile.jpg ; images/515Wx515H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
+;300Wx300H;/300Wx300H/HelloImAFile.jpg ; images/300Wx300H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
+;96Wx96H;/96Wx96H/HelloImAFile.jpg ; images/96Wx96H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
+;65Wx65H;/65Wx65H/HelloImAFile.jpg ; images/65Wx65H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
+;30Wx30H;/30Wx30H/HelloImAFile.jpg ; images/30Wx30H/HelloImAFile.jpg ; ;  ;images ;HelloImAFile.jpg;
